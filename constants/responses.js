@@ -1,16 +1,10 @@
 const responses = {
-	CAR_RESPONSES: {
-    CREATE_SUCCESS: "Car created successfully.",
-    UPDATE_SUCCESS: "Car updated successfully.",
-    DELETE_SUCCESS: "Car deleted successfully.",
-    NOT_FOUND: "Car not found."
-	},
-	WATCH_RESPONSES: {
-    CREATE_SUCCESS: "Watch created successfully.",
-    UPDATE_SUCCESS: "Watch updated successfully.",
-    DELETE_SUCCESS: "Watch deleted successfully.",
-    NOT_FOUND: "Watch not found."
-	},
+	BOOKS_RESPONSES: {
+        CREATE_SUCCESS: "Books created successfully.",
+        UPDATE_SUCCESS: "Books updated successfully.",
+        DELETE_SUCCESS: "Books deleted successfully.",
+        NOT_FOUND: "Books not found."
+    	},
   USER_RESPONSES: {
     EMAIL_NOT_FOUND: "Email not found.",
     EMAIL_ALREADY_EXISTS: "Email already exists.",
@@ -48,24 +42,6 @@ const responses = {
   },
   CONTACT_RESPONSE: {
     SENT_SUCCESS: "Email sent successfully.",
-  },
-  COURSES_RESPONSES: {
-    CREATE_SUCCESS: "Course created successfully.",
-    UPDATE_SUCCESS: "Course updated successfully.",
-    DELETE_SUCCESS: "Course deleted successfully.",
-    NOT_FOUND: "Course not found."
-  },
-  NEWS_RESPONSES: {
-    CREATE_SUCCESS: "News created successfully.",
-    UPDATE_SUCCESS: "News updated successfully.",
-    DELETE_SUCCESS: "News deleted successfully.",
-    NOT_FOUND: "News not found."
-  },
-  NEWS_COMMENT_RESPONSES: {
-    CREATE_SUCCESS: "News comment created successfully.",
-    UPDATE_SUCCESS: "News comment updated successfully.",
-    DELETE_SUCCESS: "News comment deleted successfully.",
-    NOT_FOUND: "News comment not found."
   },
   genericResponse: (
     status,

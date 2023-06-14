@@ -1,20 +1,20 @@
-const bookService = require("../../services/book/book.service");
+const booksService = require("../../services/books/books.service");
 
 const {
-    BOOK_RESPONSES,
+    BOOKS_RESPONSES,
     genericResponse,
 } = require("../../constants/responses");
 
 const getAllBooks = async (req, res) => {
   try {
-    const result = await bookService.getAllBooks();
+    const result = await booksService.getAllBooks();
 
     if (!result.length) {
       const response = genericResponse(
         404,
         false,
         null,
-        BOOK_RESPONSES.NOT_FOUND
+        BOOKS_RESPONSES.NOT_FOUND
       );
       return res.status(response.status.code).json(response);
     }
@@ -27,18 +27,18 @@ const getAllBooks = async (req, res) => {
   }
 };
 
-const getSingleBook = async (req, res) => {
-  const id = req.params.bookId;
+const getSingleBooks = async (req, res) => {
+  const id = req.params.booksId;
 
   try {
-    const book = await bookService.getAllBooks(id);
+    const books = await booksService.getAllBooks(id);
 
-    if (!book) {
+    if (!books) {
       const response = genericResponse(
         404,
         false,
         null,
-        BOOK_RESPONSES.NOT_FOUND
+        BOOKS_RESPONSES.NOT_FOUND
       );
       return res.status(response.status.code).json(response);
     }
@@ -51,16 +51,16 @@ const getSingleBook = async (req, res) => {
   }
 };
 
-const createBook = async (req, res) => {
+const createBooks = async (req, res) => {
   try {
-    await bookService.createBook(req.body);
+    await booksService.createBooks(req.body);
 
     const response = genericResponse(
       201,
       true,
       null,
       null,
-      BOOK_RESPONSES.CREATE_SUCCESS
+      BOOKS_RESPONSES.CREATE_SUCCESS
     );
     return res.status(response.status.code).json(response);
   } catch (error) {
@@ -69,11 +69,11 @@ const createBook = async (req, res) => {
   }
 };
 
-const updateBook = async (req, res) => {
-  const id = req.params.bookId;
+const updateBooks = async (req, res) => {
+  const id = req.params.booksId;
 
   try {
-    const hasUpdated = await bookService.updateBook(id, req.body);
+    const hasUpdated = await booksService.updateBooks(id, req.body);
 
     if (!hasUpdated) {
         const response = genericResponse(
@@ -81,7 +81,7 @@ const updateBook = async (req, res) => {
             false,
             null,
             null,
-            BOOK_RESPONSES.FAIL
+            BOOKS_RESPONSES.FAIL
         );
         return res.status(response.status.code).json(response);
     }
@@ -91,7 +91,7 @@ const updateBook = async (req, res) => {
       true,
       null,
       null,
-      BOOK_RESPONSES.UPDATE_SUCCESS
+      BOOKS_RESPONSES.UPDATE_SUCCESS
     );
     return res.status(response.status.code).json(response);
   } catch (error) {
@@ -100,14 +100,14 @@ const updateBook = async (req, res) => {
   }
 };
 
-const deleteBook = async (req, res) => {
-  const id = req.params.bookId;
+const deleteBooks = async (req, res) => {
+  const id = req.params.booksId;
 
   try {
-    const hasDeleted = await bookService.deleteBook(id);
+    const hasDeleted = await booksService.deleteBooks(id);
 
     if (!hasDeleted) {
-      const response = genericResponse(404, false, null, BOOK_RESPONSES.FAIL);
+      const response = genericResponse(404, false, null, BOOKS_RESPONSES.FAIL);
       return res.status(response.status.code).json(response);
     }
 
@@ -116,7 +116,7 @@ const deleteBook = async (req, res) => {
       true,
       null,
       null,
-      BOOK_RESPONSES.DELETE_SUCCESS
+      BOOKS_RESPONSES.DELETE_SUCCESS
     );
     return res.status(response.status.code).json(response);
   } catch (error) {
@@ -127,8 +127,8 @@ const deleteBook = async (req, res) => {
 
 module.exports = {
   getAllBooks,
-  getSingleBook,
-  createBook,
-  updateBook,
-  deleteBook,
+  getSingleBooks,
+  createBooks,
+  updateBooks,
+  deleteBooks,
 };

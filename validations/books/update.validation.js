@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
-const bookUpdateSchema = Joi.object({
+const booksUpdateSchema = Joi.object({
   name: Joi.string().optional(),
 });
 
-module.exports = bookUpdateSchema;
+module.exports = booksUpdateSchema;

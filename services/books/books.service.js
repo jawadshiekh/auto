@@ -1,23 +1,23 @@
 const pool = require("../../config/db.config");
 
-const getAllUhvs = async () => {
+const getAllBooks = async () => {
   const [results] = await pool.query(
-    "SELECT * FROM uhv"
+    "SELECT * FROM books"
   );
 
   return results;
 };
 
-const getSingleUhv = async (id) => {
+const getSingleBooks = async (id) => {
   const [result] = await pool.query(
-    "SELECT * FROM uhv WHERE id = ?",
+    "SELECT * FROM books WHERE id = ?",
     [id]
   );
 
   return result[0];
 };
 
-const createUhv = async (body) => {
+const createBooks = async (body) => {
   const { name } = body;
 
   const conn = await pool.getConnection();
@@ -26,7 +26,7 @@ const createUhv = async (body) => {
     await conn.beginTransaction();
 
     await pool.query(
-        `INSERT INTO uhv (name) VALUES (?)`,
+        `INSERT INTO books (name) VALUES (?)`,
         [name]
     );
 
@@ -39,7 +39,7 @@ const createUhv = async (body) => {
   }
 };
 
-const updateUhv = async (id, body) => {
+const updateBooks = async (id, body) => {
   const { name } = body;
 
   const conn = await pool.getConnection();
@@ -48,7 +48,7 @@ const updateUhv = async (id, body) => {
     await conn.beginTransaction();
 
     await pool.query(
-        `UPDATE uhv SET name = ? WHERE id = ?`,
+        `UPDATE books SET name = ? WHERE id = ?`,
         [name, id]
     );
 
@@ -61,14 +61,14 @@ const updateUhv = async (id, body) => {
   }
 };
 
-const deleteUhv = async (id) => {
+const deleteBooks = async (id) => {
   const conn = await pool.getConnection();
 
   try {
     await conn.beginTransaction();
 
     const [result] = await pool.query(
-        `DELETE FROM uhv WHERE id = ?`,
+        `DELETE FROM books WHERE id = ?`,
         [id]
     );
 
@@ -84,9 +84,9 @@ const deleteUhv = async (id) => {
 };
 
 module.exports = {
-  getAllUhvs,
-  getSingleUhv,
-  createUhv,
-  updateUhv,
-  deleteUhv,
+  getAllBooks,
+  getSingleBooks,
+  createBooks,
+  updateBooks,
+  deleteBooks,
 };
