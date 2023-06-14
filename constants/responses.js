@@ -1,33 +1,16 @@
-.routes");
-const uhvRoutes = require("./routes/uhv/uhv.routes");
-const uhvRoutes = require("./routes/uhv/uhv.routes");
-const uhvRoutes = require("./routes/uhv/uhv.routes");
-const uhvRoutes = require("./routes/uhv/uhv.routes");
-const uhvRoutes = require("./routes/uhv/uhv.routes");
-const uhvRoutes = require("./routes/uhv/uhv.routes");
-const uhvRoutes = require("./routes/uhv/uhv.routes");
-const watchRoutes = require("./routes/watch/watch.routes");
-const carRoutes = require("./routes/car/car.routes");
-app.use("/api/uhv", uhvRoutes);
-app.use("/api/uhv", uhvRoutes);
-app.use("/api/uhv", uhvRoutes);
-app.use("/api/uhv", uhvRoutes);
-app.use("/api/uhv", uhvRoutes);
-app.use("/api/uhv", uhvRoutes);
-app.use("/api/uhv", uhvRoutes);
-app.use("/api/watch", watchRoutes);
-app.use("/api/car", carRoutes);
-
-
-
-
-
-
-
-
-ponses = {
-123
-
+const responses = {
+	CAR_RESPONSES: {
+    CREATE_SUCCESS: "Car created successfully.",
+    UPDATE_SUCCESS: "Car updated successfully.",
+    DELETE_SUCCESS: "Car deleted successfully.",
+    NOT_FOUND: "Car not found."
+	},
+	WATCH_RESPONSES: {
+    CREATE_SUCCESS: "Watch created successfully.",
+    UPDATE_SUCCESS: "Watch updated successfully.",
+    DELETE_SUCCESS: "Watch deleted successfully.",
+    NOT_FOUND: "Watch not found."
+	},
   USER_RESPONSES: {
     EMAIL_NOT_FOUND: "Email not found.",
     EMAIL_ALREADY_EXISTS: "Email already exists.",

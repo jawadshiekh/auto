@@ -38,4 +38,21 @@ var additionalLine = `\napp.use("/api/${entityName}", ${entityName}Routes);\n`
 
 createOrUpdateFile('app.js', firstPart + additionalLine + secondPart);
 
+var find3 = "{";
+var responsesFile = fs.readFileSync(`constants/responses.js`, 'utf8');
+console.log(responsesFile)
+var index = responsesFile.indexOf(find3);
+console.log(index)
+var firstPart = responsesFile.substring(0, index) + find3;
+var secondPart = responsesFile.substring(index + find3.length);
+var additionalLine =
+    `\n\t${entityName.toUpperCase()}_RESPONSES: {
+    CREATE_SUCCESS: "${capitalize(entityName)} created successfully.",
+    UPDATE_SUCCESS: "${capitalize(entityName)} updated successfully.",
+    DELETE_SUCCESS: "${capitalize(entityName)} deleted successfully.",
+    NOT_FOUND: "${capitalize(entityName)} not found."
+\t},`;
+
+createOrUpdateFile('constants/responses.js', firstPart + additionalLine + secondPart);
+
 console.log(`All done.`);
