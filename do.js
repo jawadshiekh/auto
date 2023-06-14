@@ -9,34 +9,72 @@ const entityName = process.argv[2];
 
 const directories = ['route', 'controller', 'service', 'validation'];
 
-directories.forEach(directory => {
-    const starterTemplate = fs.readFileSync(`template/${directory}.template.ejs`, 'utf8');
-    const template = ejs.render(starterTemplate, { entityName, capitalize, plural: pluralize.plural });
+const validations = ['create', 'update'];
 
-    createOrUpdateFile(
-        `${directory}s/${entityName}/${entityName}.${directory === 'route' ? directory + 's' : directory}.js`, template
-    );
+const stringToSearch = [
+    ".routes\");",
+    ");"
+];
+
+const contentToAdd = [
+    `\nconst ${entityName}Routes = require("./routes/${entityName}/${entityName}.routes");`, 
+    `\napp.use("/api/${entityName}", ${entityName}Routes);\n`
+]
+
+directories.forEach(directory => {
+    if (directory === 'validation') {
+
+        validations.forEach(validation =>{
+
+            const starterTemplate = fs.readFileSync(`template/${validation}${capitalize(directory)}.template.ejs`, 'utf8');
+            const template = ejs.render(starterTemplate, { entityName, capitalize, plural: pluralize.plural });
+    
+            createOrUpdateFile(
+                `${directory}s/${pluralize.plural(entityName)}/${validation}.${directory}.js`, template
+            );
+        })
+        
+    } else {
+
+        const starterTemplate = fs.readFileSync(`template/${directory}.template.ejs`, 'utf8');
+        const template = ejs.render(starterTemplate, { entityName, capitalize, plural: pluralize.plural });
+        
+        createOrUpdateFile(
+            `${directory}s/${entityName}/${entityName}.${directory === 'route' ? directory + 's' : directory}.js`, template
+        );
+    }
 
     console.log(`${entityName} ${directory}s created successfully.`);
 });
 
-var find1 = ".routes\");";
-var appJs = fs.readFileSync(`app.js`, 'utf8');
-var lastIndex = appJs.lastIndexOf(find1);
-var firstPart = appJs.substring(0, lastIndex) + find1;
-var secondPart = appJs.substring(lastIndex + find1.length);
-var additionalLine = `\nconst ${entityName}Routes = require("./routes/${entityName}/${entityName}.routes");`
+stringToSearch.forEach((string,index) => {
 
-createOrUpdateFile('app.js', firstPart + additionalLine + secondPart);
+    var appJs = fs.readFileSync(`app.js`, 'utf8');
+    var lastIndex = appJs.lastIndexOf(string);
+    var firstPart = appJs.substring(0, lastIndex) + string;
+    var secondPart = appJs.substring(lastIndex + string.length);
+    var additionalLine = contentToAdd[index]
 
-var find2 = ");"
-var appJs = fs.readFileSync(`app.js`, 'utf8');
-var lastIndex = appJs.lastIndexOf(find2);
-var firstPart = appJs.substring(0, lastIndex) + find2;
-var secondPart = appJs.substring(lastIndex + find2.length);
-var additionalLine = `\napp.use("/api/${entityName}", ${entityName}Routes);\n`
+    createOrUpdateFile('app.js', firstPart + additionalLine + secondPart);
+})
 
-createOrUpdateFile('app.js', firstPart + additionalLine + secondPart);
+// var find1 = ".routes\");";
+// var appJs = fs.readFileSync(`app.js`, 'utf8');
+// var lastIndex = appJs.lastIndexOf(find1);
+// var firstPart = appJs.substring(0, lastIndex) + find1;
+// var secondPart = appJs.substring(lastIndex + find1.length);
+// var additionalLine = `\nconst ${entityName}Routes = require("./routes/${entityName}/${entityName}.routes");`
+
+// createOrUpdateFile('app.js', firstPart + additionalLine + secondPart);
+
+// var find2 = ");"
+// var appJs = fs.readFileSync(`app.js`, 'utf8');
+// var lastIndex = appJs.lastIndexOf(find2);
+// var firstPart = appJs.substring(0, lastIndex) + find2;
+// var secondPart = appJs.substring(lastIndex + find2.length);
+// var additionalLine = `\napp.use("/api/${entityName}", ${entityName}Routes);\n`
+
+// createOrUpdateFile('app.js', firstPart + additionalLine + secondPart);
 
 var find3 = "{";
 var responsesFile = fs.readFileSync(`constants/responses.js`, 'utf8');
