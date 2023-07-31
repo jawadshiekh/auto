@@ -1,4 +1,34 @@
 const responses = {
+	JET_RESPONSES: {
+            CREATE_SUCCESS: "Jet created successfully.",
+            UPDATE_SUCCESS: "Jet updated successfully.",
+            DELETE_SUCCESS: "Jet deleted successfully.",
+            NOT_FOUND: "Jet not found."
+        	},
+	BIKE_RESPONSES: {
+            CREATE_SUCCESS: "Bike created successfully.",
+            UPDATE_SUCCESS: "Bike updated successfully.",
+            DELETE_SUCCESS: "Bike deleted successfully.",
+            NOT_FOUND: "Bike not found."
+        	},
+	BIKE_RESPONSES: {
+            CREATE_SUCCESS: "Bike created successfully.",
+            UPDATE_SUCCESS: "Bike updated successfully.",
+            DELETE_SUCCESS: "Bike deleted successfully.",
+            NOT_FOUND: "Bike not found."
+        	},
+	BIKE_RESPONSES: {
+            CREATE_SUCCESS: "Bike created successfully.",
+            UPDATE_SUCCESS: "Bike updated successfully.",
+            DELETE_SUCCESS: "Bike deleted successfully.",
+            NOT_FOUND: "Bike not found."
+        	},
+	BIKE_RESPONSES: {
+            CREATE_SUCCESS: "Bike created successfully.",
+            UPDATE_SUCCESS: "Bike updated successfully.",
+            DELETE_SUCCESS: "Bike deleted successfully.",
+            NOT_FOUND: "Bike not found."
+        	},
 	BOOKS_RESPONSES: {
         CREATE_SUCCESS: "Books created successfully.",
         UPDATE_SUCCESS: "Books updated successfully.",
