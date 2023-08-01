@@ -31,6 +31,15 @@ if (!entityName) {
   createOrUpdateFile("./.env.development", envTemplate);
   createOrUpdateFile("./.env.staging", envTemplate);
 } else {
+  const filePath = "./app.js";
+
+  if (fs.existsSync(filePath)) {
+    console.log("File exists:", filePath);
+  } else {
+    console.error(filePath, "file does not exist. Run npm run banao first");
+    return;
+  }
+
   const directories = ["route", "controller", "service", "validation"];
 
   const validations = ["create", "update"];
@@ -50,49 +59,49 @@ if (!entityName) {
         \t},`,
   ];
 
-  //   directories.forEach((directory) => {
-  //     if (directory === "validation") {
-  //       validations.forEach((validation) => {
-  //         const starterTemplate = fs.readFileSync(
-  //           `${__dirname}/template/${validation}${capitalize(
-  //             directory
-  //           )}.template.ejs`,
-  //           "utf8"
-  //         );
-  //         const template = ejs.render(starterTemplate, {
-  //           entityName,
-  //           capitalize,
-  //           plural: pluralize.plural,
-  //         });
+  directories.forEach((directory) => {
+    if (directory === "validation") {
+      validations.forEach((validation) => {
+        const starterTemplate = fs.readFileSync(
+          `${__dirname}/template/${validation}${capitalize(
+            directory
+          )}.template.ejs`,
+          "utf8"
+        );
+        const template = ejs.render(starterTemplate, {
+          entityName,
+          capitalize,
+          plural: pluralize.plural,
+        });
 
-  //         createOrUpdateFile(
-  //           `${directory}s/${pluralize.plural(
-  //             entityName
-  //           )}/${validation}.${directory}.js`,
-  //           template
-  //         );
-  //       });
-  //     } else {
-  //       const starterTemplate = fs.readFileSync(
-  //         `${__dirname}/template/${directory}.template.ejs`,
-  //         "utf8"
-  //       );
-  //       const template = ejs.render(starterTemplate, {
-  //         entityName,
-  //         capitalize,
-  //         plural: pluralize.plural,
-  //       });
+        createOrUpdateFile(
+          `${directory}s/${pluralize.plural(
+            entityName
+          )}/${validation}.${directory}.js`,
+          template
+        );
+      });
+    } else {
+      const starterTemplate = fs.readFileSync(
+        `${__dirname}/template/${directory}.template.ejs`,
+        "utf8"
+      );
+      const template = ejs.render(starterTemplate, {
+        entityName,
+        capitalize,
+        plural: pluralize.plural,
+      });
 
-  //       createOrUpdateFile(
-  //         `${directory}s/${entityName}/${entityName}.${
-  //           directory === "route" ? directory + "s" : directory
-  //         }.js`,
-  //         template
-  //       );
-  //     }
+      createOrUpdateFile(
+        `${directory}s/${entityName}/${entityName}.${
+          directory === "route" ? directory + "s" : directory
+        }.js`,
+        template
+      );
+    }
 
-  //     console.log(`${entityName} ${directory}s created successfully.`);
-  //   });
+    console.log(`${entityName} ${directory}s created successfully.`);
+  });
 
   stringToSearch.forEach((string, index) => {
     var appJs = fs.readFileSync(`${folder[index]}`, "utf8");

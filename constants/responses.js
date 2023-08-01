@@ -1,40 +1,4 @@
 const responses = {
-	JET_RESPONSES: {
-            CREATE_SUCCESS: "Jet created successfully.",
-            UPDATE_SUCCESS: "Jet updated successfully.",
-            DELETE_SUCCESS: "Jet deleted successfully.",
-            NOT_FOUND: "Jet not found."
-        	},
-	BIKE_RESPONSES: {
-            CREATE_SUCCESS: "Bike created successfully.",
-            UPDATE_SUCCESS: "Bike updated successfully.",
-            DELETE_SUCCESS: "Bike deleted successfully.",
-            NOT_FOUND: "Bike not found."
-        	},
-	BIKE_RESPONSES: {
-            CREATE_SUCCESS: "Bike created successfully.",
-            UPDATE_SUCCESS: "Bike updated successfully.",
-            DELETE_SUCCESS: "Bike deleted successfully.",
-            NOT_FOUND: "Bike not found."
-        	},
-	BIKE_RESPONSES: {
-            CREATE_SUCCESS: "Bike created successfully.",
-            UPDATE_SUCCESS: "Bike updated successfully.",
-            DELETE_SUCCESS: "Bike deleted successfully.",
-            NOT_FOUND: "Bike not found."
-        	},
-	BIKE_RESPONSES: {
-            CREATE_SUCCESS: "Bike created successfully.",
-            UPDATE_SUCCESS: "Bike updated successfully.",
-            DELETE_SUCCESS: "Bike deleted successfully.",
-            NOT_FOUND: "Bike not found."
-        	},
-	BOOKS_RESPONSES: {
-        CREATE_SUCCESS: "Books created successfully.",
-        UPDATE_SUCCESS: "Books updated successfully.",
-        DELETE_SUCCESS: "Books deleted successfully.",
-        NOT_FOUND: "Books not found."
-    	},
   USER_RESPONSES: {
     EMAIL_NOT_FOUND: "Email not found.",
     EMAIL_ALREADY_EXISTS: "Email already exists.",
@@ -49,29 +13,10 @@ const responses = {
     COULD_NOT_UPDATE_USER: "Could not update user.",
     INCORRECT_OLD_PASSWORD: "Old password is incorrect.",
   },
-  ENTITY_RESPONSES: {
-    NOT_FOUND: "Could not find any record for this entity yet.",
-  },
-  DIRECTOR_EMAILS: {
-    CREATE_SUCCESS: "Emails added successfully.",
-  },
-  POLL_RESPONSES: {
-    CREATE_SUCCESS: "Poll created successfully.",
-    REPLACE_SUCCESS: "Poll has been replaced successfully.",
-    CANNOT_CREATE: "Poll cannot be created, voting days bro.",
-    NOT_FOUND: "Poll not found.",
-  },
-  VOTE_RESPONSES: {
-    CREATE_SUCCESS: "Vote added successfully.",
-    CANNOT_VOTE: "Vote cannot be added, creating days bro.",
-  },
   ERROR_RESPONSES: {
     INVALID_REQUEST: "kya chahta he bhai???",
     TOKEN_NOT_PROVIDED: "Token not provided.",
     INVALID_TOKEN: "Invalid token.",
-  },
-  CONTACT_RESPONSE: {
-    SENT_SUCCESS: "Email sent successfully.",
   },
   genericResponse: (
     status,
@@ -89,7 +34,7 @@ const responses = {
       error: error,
       message: message,
     };
-  }
+  },
 };
 
 module.exports = responses;
