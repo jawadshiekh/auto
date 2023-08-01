@@ -6,6 +6,7 @@ const capitalize = require("./capitalize");
 const createOrUpdateFile = require("./createOrUpdateFile");
 
 const validations = ["create", "update"];
+const routeStringToSearch = ['");', ");"];
 
 const createApp = () => {
   const appStarterTemplate = fs.readFileSync(
@@ -67,6 +68,15 @@ const createMiddleware = () => {
     validateRequestTemplate
   );
   console.log(`middleware created successfully.`);
+};
+const createConstants = () => {
+  const constantStarterTemplate = fs.readFileSync(
+    `${__dirname}/../template/constant.template.ejs`,
+    "utf8"
+  );
+  const constantTemplate = ejs.render(constantStarterTemplate);
+  createOrUpdateFile("./constants/responses.js", constantTemplate);
+  console.log(`constants created successfully.`);
 };
 const createRoute = (entityName) => {
   const starterTemplate = fs.readFileSync(
@@ -135,14 +145,53 @@ const createValidation = (entityName) => {
   });
   console.log(`${entityName} validations created successfully.`);
 };
+const updateApp = (entityName) => {
+  const routeContentToAdd = [
+    `\nconst ${entityName}Routes = require("./routes/${entityName}/${entityName}.routes");`,
+    `\napp.use("/api/${entityName}", ${entityName}Routes);\n`,
+  ];
 
+  routeStringToSearch.forEach((string, index) => {
+    const appJs = fs.readFileSync(`app.js`, "utf8");
+
+    const lastIndex = appJs.lastIndexOf(string);
+
+    const firstPart = appJs.substring(0, lastIndex) + string;
+    const secondPart = appJs.substring(lastIndex + string.length);
+    const additionalLine = routeContentToAdd[index];
+
+    createOrUpdateFile(`app.js`, firstPart + additionalLine + secondPart);
+  });
+};
+const updateConstants = (entityName) => {
+  const appJs = fs.readFileSync("constants/responses.js", "utf8");
+  const string = "{";
+  const index = appJs.indexOf(string);
+
+  const firstPart = appJs.substring(0, index) + string;
+  const secondPart = appJs.substring(index + string.length);
+  const additionalLine = `\n\t${entityName.toUpperCase()}_RESPONSES: {
+    CREATE_SUCCESS: "${capitalize(entityName)} created successfully.",
+    UPDATE_SUCCESS: "${capitalize(entityName)} updated successfully.",
+    DELETE_SUCCESS: "${capitalize(entityName)} deleted successfully.",
+    NOT_FOUND: "${capitalize(entityName)} not found."
+\t},`;
+
+  createOrUpdateFile(
+    "constants/responses.js",
+    firstPart + additionalLine + secondPart
+  );
+};
 module.exports = {
   createApp,
   createServer,
   createEnv,
   createMiddleware,
+  createConstants,
   createController,
   createRoute,
   createService,
   createValidation,
+  updateApp,
+  updateConstants,
 };
