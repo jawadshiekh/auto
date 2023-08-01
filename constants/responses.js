@@ -1,4 +1,10 @@
 const responses = {
+	BOOK_RESPONSES: {
+            CREATE_SUCCESS: "Book created successfully.",
+            UPDATE_SUCCESS: "Book updated successfully.",
+            DELETE_SUCCESS: "Book deleted successfully.",
+            NOT_FOUND: "Book not found."
+        	},
   USER_RESPONSES: {
     EMAIL_NOT_FOUND: "Email not found.",
     EMAIL_ALREADY_EXISTS: "Email already exists.",

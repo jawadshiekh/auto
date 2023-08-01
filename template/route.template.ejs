@@ -1,6 +1,6 @@
 const express = require("express");
 
-const validateRequestBody = require("../../middleware/validateRequestBody.middleware");
+const validateRequest = require("../../middleware/validateRequest.middleware");
 
 const <%= entityName %>CreateSchema = require("../../validations/<%= plural(entityName) %>/create.validation");
 const <%= entityName %>UpdateSchema = require("../../validations/<%= plural(entityName) %>/update.validation");
@@ -17,8 +17,8 @@ const router = express.Router();
 
 router.get("/", getAll<%= capitalize(plural(entityName)) %>);
 router.get("/:<%= entityName %>Id", getSingle<%= capitalize(entityName) %>);
-router.post("/", validateRequestBody(<%= entityName %>CreateSchema), create<%= capitalize(entityName) %>);
-router.patch("/:<%= entityName %>Id", validateRequestBody(<%= entityName %>UpdateSchema), update<%= capitalize(entityName) %>);
+router.post("/", validateRequest(<%= entityName %>CreateSchema), create<%= capitalize(entityName) %>);
+router.patch("/:<%= entityName %>Id", validateRequest(<%= entityName %>UpdateSchema), update<%= capitalize(entityName) %>);
 router.delete("/:<%= entityName %>Id", delete<%= capitalize(entityName) %>);
 
 module.exports = router;

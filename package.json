@@ -1,11 +1,11 @@
 {
-  "name": "auto",
+  "name": "express-setup",
   "version": "1.0.0",
-  "description": "",
+  "description": "This library was made by Syed Abrar Ali and Jawad Sheikh for automating repetitive tasks.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "banao": "node do.js"
+    "postinstall": "node addScript.js",
+    "setup": "node index.js"
   },
   "keywords": [],
   "author": "",
